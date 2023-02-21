@@ -1,6 +1,5 @@
-package com.tutorialsninja.qa.screenshot;
+package base;
 
-import base.CommonAPI;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -16,17 +15,13 @@ import java.util.Date;
 public class TakeScreenShot extends CommonAPI {
 
 
-     WebDriver driver;
 
+    public TakeScreenShot (WebDriver driver){
 
-
-
+        super.driver= driver;
+    }
     public  void ScreenShot(ITestResult result) {
-
-
         String name = result.getName();
-
-
         DateFormat df = new SimpleDateFormat("MMddyyyyHHmma");
         Date date = new Date();
         df.format(date);
@@ -36,12 +31,15 @@ public class TakeScreenShot extends CommonAPI {
                 file = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
                 try {
                     FileUtils.copyFile(file, new File(System.getProperty("user.dir") + "\\screenshots\\screenshotsFailedTest\\ " + name + " " + df.format(date) + ".jpeg"));
+
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
 
 
-            } else
+
+
+            }/* else
                 if (result.getStatus() == ITestResult.SUCCESS) {
                     file = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
                     try {
@@ -59,29 +57,20 @@ public class TakeScreenShot extends CommonAPI {
                             throw new RuntimeException(e);
                         }
 
-                    }
+                    }*/
+
 
 
     }
 
-    public  String ScreenshotPath(ITestResult result){
+    public  String ScreenshotPathForExtentReport(ITestResult result){
 
-        File file;
         String name = result.getName();
         DateFormat df = new SimpleDateFormat("MMddyyyyHHmma");
         Date date = new Date();
         df.format(date);
-        String Path= System.getProperty("user.dir") + "\\screenshots\\screenshotsFailedTest\\ " + name + " " + df.format(date) + ".jpeg";
-        if (result.getStatus() == ITestResult.FAILURE) {
-            file = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-            try {
-                FileUtils.copyFile(file, new File(Path));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+        String screenShotPath= System.getProperty("user.dir") + "\\screenshots\\screenshotsFailedTest\\ " + name + " " + df.format(date) + ".jpeg";
 
-
-        }
-        return Path;
+        return screenShotPath;
     }
 }

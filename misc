@@ -1,0 +1,233 @@
+
+public class HomePageTest extends CommonAPI {
+
+
+    @Test
+    public void ClickOnAccountButton() {
+
+        HomePage homePage = new HomePage(getDriver());
+        homePage.AccountField().click();
+    }
+
+    @Test(enabled = false)
+    public void ClickOnSignIn() {
+
+        HomePage homePage = new HomePage(getDriver());
+        homePage.AccountField().click();
+        homePage.SignInField().click();
+    }
+
+
+    @Test(enabled = false)
+    public void loginUsingInvalidUserNameAndPassword() {
+
+        HomePage homePage = new HomePage(getDriver());
+        homePage.AccountField().click();
+        homePage.SignInField().click();
+        homePage.userNameField().sendKeys("chihaja@hotmail.haha");
+        homePage.passwordField().sendKeys("hhhh");
+        homePage.signInButtonField().click();
+        String Expected = "Sorry, something went wrong. Please try again.";
+
+        String Actual = homePage.ErrorMessageField().getText();
+
+        Assert.assertEquals(Actual, Expected);
+    }
+
+
+    @Test(enabled = false)
+    public void getFullListOfLinksInHomePage() {
+
+
+        HomePage homePage = new HomePage(getDriver());
+        for (WebElement element : homePage.Links()) {
+            System.out.println(element.getAttribute("href"));
+
+        }
+    }
+
+
+    @Test(enabled = false)
+    public void getAllLinksInTheFooter() {
+
+
+        HomePage homePage = new HomePage(getDriver());
+        for (WebElement element : homePage.LinksInTheFooter()) {
+            System.out.println(element.getAttribute("href"));
+
+
+        }
+
+        System.out.println(homePage.LinksInTheFooter().size());
+    }
+
+    @Test(enabled = false)
+    public void checkBrokenLinksInTheFooter() {
+
+        List<String> titles = new ArrayList<>();
+        List<String> Links = new ArrayList<>();
+        HomePage homePage = new HomePage(getDriver());
+//        for(WebElement element : homePage.LinksInTheFooter()) {
+//            System.out.println(element.getAttribute("href"));
+//
+//
+//
+//        }
+        for (int i = 0; i < homePage.LinksInTheFooter().size(); i++) {
+            WebElement element = homePage.LinksInTheFooter().get(i);
+            Links.add(element.getAttribute("href"));
+            getDriver().get(element.getAttribute("href"));
+            titles.add(getDriver().getTitle());
+            getDriver().navigate().back();
+            System.out.println(titles.get(i) + " " + Links.get(i));
+        }
+
+        System.out.println(homePage.LinksInTheFooter().size());
+    }
+
+
+    @Test(enabled = false)
+    public void getElementsSuggestedFromSearchBarList() {
+
+        HomePage homePage = new HomePage(getDriver());
+        homePage.searchBoxBar().sendKeys("samsung");
+
+        List<WebElement>elements = getDriver().findElements(By.id("suggestViewClientComponent"));
+
+        for(WebElement e :elements) {
+            System.out.println(e.getText());
+        }
+
+    }
+
+
+
+
+}
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+class superclass {
+    public void displayResult() {
+        System.out.println("Printing from superclass");
+    }
+}
+
+    class subclass extends superclass {
+        public void displayResult() {
+
+            System.out.println("Displaying from subClass");
+            super.displayResult();
+        }
+
+
+        public static void main(String[] args) {
+            subclass obj = new subclass();
+            obj.displayResult();
+        }
+
+}
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+package com.bestbuy.qa.pages;
+
+import base.CommonAPI;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
+
+public class HomePage extends CommonAPI {
+
+    WebDriver driver;
+    By Account = By.xpath("//*[@class='v-p-right-xxs line-clamp']");
+    By SignIn = By.linkText("Sign In");
+    By UserName = By.id("fld-e");
+    By Password = By.id("fld-p1");
+    By SignInButton = By.xpath("//*[@class='c-button c-button-secondary c-button-lg c-button-block c-button-icon c-button-icon-leading cia-form__controls__submit ']");
+    By ErrorMessage = By.xpath("//*[@class='c-alert-content rounded-r-100 flex-fill v-bg-pure-white p-200 pl-none']");
+    By Links = By.tagName("a");
+    By SearchBox = By.id("gh-search-input");
+    By SearchBoxList = By.id("suggestViewClientComponent");
+
+
+
+    public HomePage(WebDriver driver) {
+
+        this.driver = driver;
+
+    }
+
+    public WebElement AccountField() {
+
+        return driver.findElement(Account);
+    }
+
+    public WebElement SignInField() {
+
+        return driver.findElement(SignIn);
+    }
+
+    public WebElement userNameField() {
+
+        return driver.findElement(UserName);
+    }
+
+    public WebElement passwordField() {
+
+        return driver.findElement(Password);
+    }
+
+
+    public WebElement signInButtonField() {
+
+        return driver.findElement(SignInButton);
+    }
+
+    public WebElement ErrorMessageField() {
+
+        return driver.findElement(ErrorMessage);
+    }
+
+
+    public List<WebElement> Links() {
+
+
+        return driver.findElements(Links);
+    }
+
+    public List<WebElement> LinksInTheFooter() {
+
+        WebElement Footer = driver.findElement(By.id("footer"));
+        return Footer.findElements(By.tagName("a"));
+    }
+
+    public WebElement searchBoxBar(){
+
+        return driver.findElement(SearchBox);
+    }
+
+    public WebElement searchBoxList(){
+
+        return driver.findElement(SearchBoxList);
+
+    }
+
+
+
+}
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+browserName=chrome
+validEmail=amotooricap9@gmail.com
+validPassword=12345

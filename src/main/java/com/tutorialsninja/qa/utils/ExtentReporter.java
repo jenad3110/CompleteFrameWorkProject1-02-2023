@@ -1,7 +1,8 @@
-package com.tutorialsninja.qa.reporting;
+package com.tutorialsninja.qa.utils;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import com.aventstack.extentreports.reporter.configuration.Theme;
 
 public class ExtentReporter {
 
@@ -17,6 +18,8 @@ public class ExtentReporter {
 
         extentReport = new ExtentReports();
         extentReport.attachReporter(reporter);
+        reporter.config().setTheme(Theme.DARK);
+
         extentReport.setSystemInfo("Operating System","Windows 11");
         extentReport.setSystemInfo("Tested By","Mohamed fox");
 

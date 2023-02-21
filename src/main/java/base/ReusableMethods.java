@@ -1,4 +1,4 @@
-package com.tutorialsninja.qa.base;
+package base;
 
 public class ReusableMethods extends CommonAPI{
 }

@@ -1,10 +1,5 @@
 package com.tutorialsninja.qa.utils;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.Date;
-
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -15,9 +10,14 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.io.FileHandler;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Date;
+
 public class Utilities {
 	
-	public static final int IMPLICIT_WAIT_TIME=10;
+	public static final int IMPLICIT_WAIT_TIME=5;
 	public static final int PAGE_LOAD_TIME=5;
 	
 	public static String generateEmailWithTimeStamp() {

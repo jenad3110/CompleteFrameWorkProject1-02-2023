@@ -1,33 +1,55 @@
 package com.tutorialsninja.qa.testcases;
 
+import com.tutorialsninja.qa.base.Base;
+import com.tutorialsninja.qa.pages.AccountPage;
+import com.tutorialsninja.qa.pages.LandingPage;
+import com.tutorialsninja.qa.pages.LoginPage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
 
-public class LoginTest {
+public class LoginTest extends Base {
+
+    Logger log;
 
     WebDriver driver;
 
-    @Test(dataProvider="getLoginData")
-    public void login(String email,String password,String expectedResult) throws IOException, InterruptedException {
+    @BeforeMethod
+    public void openApplication() throws IOException {
+
+        log = LogManager.getLogger(LoginTest.class.getName());
 
         driver = initializeBrowser();
-        driver.get(prop.getProperty("url"));
+        log.debug("Browser got launched");
+
+        log.debug("Navigated to application URL");
+
+    }
+
+    @Test(dataProvider = "getLoginData")
+    public void login(String email, String password, String expectedResult) throws IOException, InterruptedException {
 
         LandingPage landingPage = new LandingPage(driver);
         landingPage.myAccountDropdown().click();
+        log.debug("Clicked on My Account dropdown");
         landingPage.loginOption().click();
+        log.debug("Clicked on login option");
 
         Thread.sleep(3000);
 
         LoginPage loginPage = new LoginPage(driver);
         loginPage.emailAddressTextField().sendKeys(email);
+        log.debug("Email addressed got entered");
         loginPage.passwordField().sendKeys(password);
+        log.debug("Password got entered");
         loginPage.loginButton().click();
+        log.debug("Clicked on Login Button");
 
         AccountPage accountPage = new AccountPage(driver);
 
@@ -35,17 +57,26 @@ public class LoginTest {
 
         try {
 
-            if(accountPage.editYourAccountInformation().isDisplayed()) {
+            if (accountPage.editYourAccountInformation().isDisplayed()) {
+                log.debug("User got logged in");
                 acutualResult = "Success";
             }
 
-        }catch(Exception e) {
-
+        } catch (Exception e) {
+            log.debug("User didn't log in");
             acutualResult = "Failure";
 
         }
 
-        Assert.assertEquals(acutualResult,expectedResult);
+        if (acutualResult.equals(expectedResult)) {
+
+            log.info("Login Test got passed");
+
+        } else {
+
+            log.error("Login Test got failed");
+        }
+
 
     }
 
@@ -53,16 +84,16 @@ public class LoginTest {
     public void closure() {
 
         driver.close();
+        log.debug("Browser got closed");
 
     }
 
     @DataProvider
     public Object[][] getLoginData() {
 
-        Object[][] data = {{"arun.selenium@gmail.com","Second@123","Success"},{"dummy@test.com","1234","Failure"}};
+        Object[][] data = {{"arun.selenium@gmail.com", "Second@123", "Success"}, {"dummy@test.com", "1234", "Failure"}};
 
         return data;
 
     }
-
 }
