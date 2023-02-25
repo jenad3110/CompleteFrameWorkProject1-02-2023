@@ -6,7 +6,8 @@
     </listeners>
     <test name="TutorialsNinja Tests" parallel="classes" thread-count="3">
         <classes>
-            <class name="com.tutorialsninja.qa.testcases.LoginTest"/>
+            <class name="com.tutorialsninja.qa.testcases.HomePageTest"/>
+<!--            <class name="com.tutorialsninja.qa.testcases.LoginTest"></class>-->
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->

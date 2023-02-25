@@ -1,11 +1,12 @@
 package com.tutorialsninja.qa.pages;
 
+import com.tutorialsninja.qa.base.CommonAPI;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LandingPage {
+public class LandingPage extends CommonAPI {
 
     WebDriver driver;
 
@@ -32,6 +33,13 @@ public class LandingPage {
 
         return loginOption;
 
+    }
+
+    public LoginPage clickOnLoginOption(){
+
+        loginOption.click();
+
+        return new LoginPage(driver);
     }
 
 }

@@ -1,25 +1,24 @@
 package com.tutorialsninja.qa.testcases;
 
-import com.tutorialsninja.qa.base.Base;
+
+import com.tutorialsninja.qa.base.CommonAPI;
 import com.tutorialsninja.qa.pages.AccountPage;
 import com.tutorialsninja.qa.pages.LandingPage;
 import com.tutorialsninja.qa.pages.LoginPage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
 
-public class LoginTest extends Base {
+public class LoginTest extends CommonAPI {
 
-    Logger log;
+    Logger log = LogManager.getLogger(LoginTest.class.getName());
+    ;
 
-    WebDriver driver;
-
+    // WebDriver driver;
+/*
     @BeforeMethod
     public void openApplication() throws IOException {
 
@@ -31,19 +30,20 @@ public class LoginTest extends Base {
         log.debug("Navigated to application URL");
 
     }
-
+*/
     @Test(dataProvider = "getLoginData")
     public void login(String email, String password, String expectedResult) throws IOException, InterruptedException {
 
-        LandingPage landingPage = new LandingPage(driver);
+        LandingPage landingPage = new LandingPage(getDriver());
         landingPage.myAccountDropdown().click();
         log.debug("Clicked on My Account dropdown");
-        landingPage.loginOption().click();
+        /*landingPage.loginOption().click();
         log.debug("Clicked on login option");
-
+*/
         Thread.sleep(3000);
 
-        LoginPage loginPage = new LoginPage(driver);
+        //LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = landingPage.clickOnLoginOption();
         loginPage.emailAddressTextField().sendKeys(email);
         log.debug("Email addressed got entered");
         loginPage.passwordField().sendKeys(password);
@@ -51,7 +51,7 @@ public class LoginTest extends Base {
         loginPage.loginButton().click();
         log.debug("Clicked on Login Button");
 
-        AccountPage accountPage = new AccountPage(driver);
+        AccountPage accountPage = new AccountPage(getDriver());
 
         String acutualResult = null;
 
@@ -79,7 +79,7 @@ public class LoginTest extends Base {
 
 
     }
-
+/*
     @AfterMethod
     public void closure() {
 
@@ -87,6 +87,7 @@ public class LoginTest extends Base {
         log.debug("Browser got closed");
 
     }
+    */
 
     @DataProvider
     public Object[][] getLoginData() {
