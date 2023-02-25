@@ -1,0 +1,15 @@
+12:56:22.696 [AsyncHttpClient-1-2] DEBUG io.netty.buffer.AbstractByteBuf - -Dio.netty.buffer.checkAccessible: true
+12:56:22.700 [AsyncHttpClient-1-2] DEBUG io.netty.buffer.AbstractByteBuf - -Dio.netty.buffer.checkBounds: true
+12:56:22.700 [AsyncHttpClient-1-2] DEBUG io.netty.util.ResourceLeakDetectorFactory - Loaded default ResourceLeakDetector: io.netty.util.ResourceLeakDetector@34f91fe1
+12:56:22.719 [AsyncHttpClient-1-2] DEBUG io.netty.util.Recycler - -Dio.netty.recycler.maxCapacityPerThread: 4096
+12:56:22.719 [AsyncHttpClient-1-2] DEBUG io.netty.util.Recycler - -Dio.netty.recycler.ratio: 8
+12:56:22.719 [AsyncHttpClient-1-2] DEBUG io.netty.util.Recycler - -Dio.netty.recycler.chunkSize: 32
+12:56:22.719 [AsyncHttpClient-1-2] DEBUG io.netty.util.Recycler - -Dio.netty.recycler.blocking: false
+12:56:23.293 [AsyncHttpClient-1-2] DEBUG io.netty.handler.codec.compression.Brotli - brotli4j not in the classpath; Brotli support will be unavailable.
+12:56:23.364 [TestNG-test=TutorialsNinja Tests-1] DEBUG io.netty.util.internal.ThreadLocalRandom - -Dio.netty.initialSeedUniquifier: 0xd1650165be142060
+12:56:23.406 [TestNG-test=TutorialsNinja Tests-1] WARN  com.tutorialsninja.qa.base.CommonAPI - check the Browser parameter in config.properties file
+12:56:23.406 [TestNG-test=TutorialsNinja Tests-1] FATAL com.tutorialsninja.qa.base.CommonAPI - check the Browser parameter in config.properties file
+12:56:27.074 [TestNG-test=TutorialsNinja Tests-1] INFO  com.tutorialsninja.qa.base.CommonAPI - The browser chrom selected 
+12:56:27.445 [TestNG-test=TutorialsNinja Tests-1] INFO  com.tutorialsninja.qa.base.CommonAPI - The url http://tutorialsninja.com/demo/ entered
+12:56:29.769 [AsyncHttpClient-1-4] TRACE io.netty.handler.codec.http.websocketx.WebSocket08FrameEncoder - Encoding WebSocket Frame opCode=8 length=26
+12:56:30.578 [TestNG-test=TutorialsNinja Tests-1] INFO  com.tutorialsninja.qa.base.CommonAPI -  "drive.quit()" method successfully executed
